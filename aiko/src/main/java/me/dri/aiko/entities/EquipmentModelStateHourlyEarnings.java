@@ -13,9 +13,9 @@ public class EquipmentModelStateHourlyEarnings {
     public EquipmentModelStateHourlyEarnings() {
 
     }
-
     @EmbeddedId
     private EquipmentModelStateHourlyEarningsId id;
 
     private Double value;
+
 }

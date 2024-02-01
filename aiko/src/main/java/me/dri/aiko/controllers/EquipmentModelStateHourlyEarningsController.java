@@ -1,13 +1,11 @@
 package me.dri.aiko.controllers;
 
 import me.dri.aiko.entities.dto.EquipmentModelStateHourlyEarningsDTO;
+import me.dri.aiko.entities.dto.EquipmentModelStateHourlyEarningsInputDTO;
 import me.dri.aiko.services.interfaces.EquipmentModelStateHourlyEarningsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -26,8 +24,13 @@ public class EquipmentModelStateHourlyEarningsController {
     public List<EquipmentModelStateHourlyEarningsDTO> findAll() {
         return this.service.findAll();
     }
-    @GetMapping(path = "/{idEquipmentModel}")
-    public ResponseEntity<EquipmentModelStateHourlyEarningsDTO> findEarningsByEquipmentModelName(@PathVariable String idEquipmentModel) {
-        return ResponseEntity.ok(this.service.findEquipmentModelHourlyByEquipmentModelName(idEquipmentModel));
+    @GetMapping(path = "/{modelEquipmentID}/{stateEquipmentId}")
+    public ResponseEntity<EquipmentModelStateHourlyEarningsDTO> findEquipmentModelHourlyEarnings(@PathVariable String modelEquipmentID, @PathVariable String stateEquipmentId) {
+        return ResponseEntity.ok(this.service.findEquipmentModelHourlyEarnings(modelEquipmentID, stateEquipmentId));
     }
+    @PostMapping
+    public EquipmentModelStateHourlyEarningsDTO createEarning(@RequestBody EquipmentModelStateHourlyEarningsInputDTO earningsInputDTO) {
+        return this.service.createEquipmentModelHourlyEarnings(earningsInputDTO);
+    }
+
 }
